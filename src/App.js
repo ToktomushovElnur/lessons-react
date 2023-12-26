@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function Form(){
+  const [form, setForm] = useState({
+    firstName: 'Barbara',
+    lastName:'Johnson',
+    phone:'+996500425556'
+  });
+  return(
+      <>
+        <label>
+          First name:
+          <input value={form.firstName} onChange={e =>
+            setForm({
+              ...form,
+              firstName: e.target.value
+          })
+          }/>
+        </label>
+        <label>
+          Last name:
+          <input value={form.lastName} onChange={e =>
+            setForm({
+              ...form,
+              lastName: e.target.value
+          })
+          }/>
+        </label>
+          <label>
+          Phone Number:
+          <input value={form.phoneNumber} onChange={e => {
+            setForm({
+              ...form,
+                phoneNumber: e.target.value
+          })
+          }}/>
+        </label>
+          <p>
+              {form.firstName}{''}
+              {form.lastName}{''}
+              {''}({form.phoneNumber})
+          </p>
+      </>
+  )
 }
-
-export default App;
