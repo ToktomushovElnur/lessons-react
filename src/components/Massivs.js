@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import AddTodo from "./AddTodo";
 import TaskList from "./TaskList";
@@ -35,7 +34,6 @@ export default function TaskApp() {
         setTodos(todos.filter((t) => t.id !== todoId));
     }
 
-    // Добавляем функцию поиска по id
     const findTodoById = (id) => {
         return todos.find((todo) => todo.id === id);
     };

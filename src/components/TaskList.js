@@ -1,4 +1,3 @@
-// TaskList.js
 import React, { useState } from "react";
 import Task from "./Task";
 import "../index.css";
@@ -9,15 +8,15 @@ export default function TaskList({
                                      onDeleteTodo,
                                      findTodoById,
                                  }) {
-    const [searchId, setSearchId] = useState(""); // состояние для ввода id
+    const [searchId, setSearchId] = useState("");
     const [isEditingId, setIsEditingId] = useState(null);
-    const [foundTodo, setFoundTodo] = useState(null); // новое состояние для отображения найденной задачи
+    const [foundTodo, setFoundTodo] = useState(null);
 
     const handleSearch = () => {
         const id = parseInt(searchId, 10);
         if (!isNaN(id)) {
             const foundTodo = findTodoById(id);
-            setFoundTodo(foundTodo); // обновляем состояние найденной задачи
+            setFoundTodo(foundTodo);
         } else {
             console.log("Некорректный id");
         }
@@ -52,7 +51,7 @@ export default function TaskList({
                 </label>
                 <button onClick={handleSearch}>Найти</button>
             </div>
-            {foundTodo && ( // отображаем результат поиска, если задача найдена
+            {foundTodo && (
                 <div>
                     <h2>Результат поиска:</h2>
                     <p>ID: {foundTodo.id}</p>
