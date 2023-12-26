@@ -1,48 +1,55 @@
-import React from "react";
-import {useState} from "react";
+
+import React, { useState } from "react";
 import AddTodo from "./AddTodo";
 import TaskList from "./TaskList";
 
 let nextId = 3;
+
 const initialTodos = [
-    {id: 0, title: "Buy milk", done: true},
-    {id: 1, title: "Сделать ДЗ", done: true},
-    {id: 2, title: "Написать ФИО преподу", done: true}
-]
+    { id: 0, title: <span>Buy milk</span>, done: true },
+    { id: 1, title: <span>Сделать ДЗ</span>, done: true },
+    { id: 2, title: <span>Написать ФИО преподу</span>, done: true },
+];
 
 export default function TaskApp() {
-    const [todos, setTodos] = useState(initialTodos)
+    const [todos, setTodos] = useState(initialTodos);
 
-    function handleAddTodo(title){
-        setTodos([
-            ...todos,
+    const handleAddTodo = (title) => {
+        setTodos((prevTodos) => [
+            ...prevTodos,
             {
                 id: nextId++,
                 title: title,
-                done: false
-            }
-        ])
-    }
+                done: false,
+            },
+        ]);
+    };
+
     function handleChangeTodos(nextTodo) {
-        setTodos(todos.map(t => {
-            if (t.id === nextTodo.id){
-                return nextTodo
-            } else {
-                return t
-            }
-        }))
+        setTodos((prevTodos) =>
+            prevTodos.map((t) => (t.id === nextTodo.id ? nextTodo : t))
+        );
     }
+
     function handleDeleteTodo(todoId) {
         setTodos(todos.filter((t) => t.id !== todoId));
     }
 
+    // Добавляем функцию поиска по id
+    const findTodoById = (id) => {
+        return todos.find((todo) => todo.id === id);
+    };
+
 
     return (
         <>
-            <AddTodo onAddTodo={handleAddTodo}/>
-            <TaskList todos={todos}
-                      onChangeTodo={handleChangeTodos}
-                      onDeleteTodo={handleDeleteTodo}/>
+            <AddTodo onAddTodo={handleAddTodo} />
+            <TaskList
+                todos={todos}
+                onChangeTodo={handleChangeTodos}
+                onDeleteTodo={handleDeleteTodo}
+                findTodoById={findTodoById}
+            />
         </>
-    )
+    );
 }
